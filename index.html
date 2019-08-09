@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>View</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="script.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div id="task-list">		
+		<task-status 
+			v-for="task in tasks"
+  			:key="task.id"
+  			:index="task.id"
+  			:id="'task-'+task.id"
+  			:name="task.name"
+  			:complete="task.complete">
+  		</task-status>
+	</div>
+<script type="text/javascript">
+Vue.component('task-status', {
+  props: ['name', 'complete', 'index'],
+  data: function () {
+    return {
+      	success: false
+    }
+  },
+  template: `<div class="task">
+	<div class="checkmark">
+	    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" x="0px" y="0px"
+	        viewBox="0, 0, 100, 100" id="checkmark">
+	        <g transform="">
+		        <circle class="path" :class="{'path-complete': success}" fill="none" stroke="#7DB0D5" stroke-width="8" stroke-miterlimit="10" cx="50" cy="50" r="44"/>
+	            <circle class="fill" :class="{'fill-complete': complete, 'success': success}" fill="none" stroke="#7DB0D5" stroke-width="8" stroke-miterlimit="10" cx="50" cy="50" r="44"/>
+		        <polyline class="check" :class="{'check-complete': complete, 'success': success}" fill="none" stroke="#7DB0D5" stroke-width="8" stroke-linecap="round" stroke-miterlimit="10" 
+	                points="70,35 45,65 30,52  "/>
+	        </g>
+	    </svg>
+	</div>
+	<span>{{ name }} {{complete?' completed':''}} {{success?' successfully!':''}}</span>
+</div>`,
+  watch: {
+    complete: function (newStatus, oldSatus) {
+      	self = this;
+      	setTimeout(function () {
+	        self.success = true;
+	    }, 1000);
+	    setTimeout(function () {
+      		self.next_task();
+	    }, 3000);
+    }
+  },
+  methods:{
+    next_task: function(){
+    	app.tasks[this.index].complete = true;
+    }
+  }
+});
+
+app = new Vue({
+	el: '#task-list',
+	data: {
+	    tasks: [
+	      { id: 1, name: 'Data Uploading', complete: false },
+	      { id: 2, name: 'Data Preprocessing', complete: false },
+	      { id: 3, name: 'Model Creating', complete: false },
+	      { id: 4, name: 'Model Deploying', complete: false }
+	    ]
+  }
+})
+
+$(function(){
+ setTimeout(function(){
+ 	app.tasks[0].complete = true;
+ }, 2000);
+})	
+</script>
+</body>
+</html>
