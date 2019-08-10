@@ -162,3 +162,9 @@
     stroke: #009900;
     transition: stroke .6s;
 }
+
+.fail 
+{
+    stroke: #991111;
+    transition: stroke .6s;
+}
