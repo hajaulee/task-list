@@ -16,12 +16,12 @@
   			:id="'task-'+task.id"
   			:name="task.name"
   			:complete="task.complete"
-			:completedFail="task.completedFail">
+			:completedfail="task.completedfail">
   		</task-status>
 	</div>
 <script type="text/javascript">
 Vue.component('task-status', {
-  props: ['name', 'complete', 'index', 'completedFail'],
+  props: ['name', 'complete', 'index', 'completedfail'],
   data: function () {
     return {
       	success: false,
@@ -37,20 +37,20 @@ Vue.component('task-status', {
 	            <circle class="fill" :class="{'fill-complete': complete, 'success': success, 'fail':fail}" fill="none" stroke="#7DB0D5" stroke-width="8" stroke-miterlimit="10" cx="50" cy="50" r="44"/>
 		        <polyline class="check" :class="{'check-complete': complete,'success': success}" fill="none" stroke="#7DB0D5" stroke-width="8" stroke-linecap="round" stroke-miterlimit="10" 
 	                points="70,35 45,65 30,52  "/>
-			<polyline class="check" :class="{'check-complete': completedFail, 'fail': fail}" fill="none" stroke="#7DB0D5" stroke-width="8" stroke-linecap="round" stroke-miterlimit="10" 
+			<polyline class="check" :class="{'check-complete': completedfail, 'fail': fail}" fill="none" stroke="#7DB0D5" stroke-width="8" stroke-linecap="round" stroke-miterlimit="10" 
 	                points="32,32 68,68"/>
-			<polyline class="check" :class="{'check-complete': completedFail, 'fail': fail}" fill="none" stroke="#7DB0D5" stroke-width="8" stroke-linecap="round" stroke-miterlimit="10" 
+			<polyline class="check" :class="{'check-complete': completedfail, 'fail': fail}" fill="none" stroke="#7DB0D5" stroke-width="8" stroke-linecap="round" stroke-miterlimit="10" 
 	                points="68,32 32,68"/>
 	        </g>
 	    </svg>
 	</div>
-	<span>{{ name }} {{(complete||complatedFail)?' completed':''}} {{success?' successfully!':''}} {{fail?' failure!':''}}</span>
+	<span>{{ name }} {{(complete||completedfail)?' completed':''}} {{success?' successfully!':''}} {{fail?' failure!':''}}</span>
 </div>`,
   watch: {
     complete: function (newStatus, oldSatus) {
       	setTimeout(function () {
 	      this.success = this.complete;
-	      this.fail = this.completedFail;
+	      this.fail = this.completedfail;
 	    }.bind(this), 1000);
 	    setTimeout(this.next_task, 3000);
     }
@@ -61,7 +61,7 @@ Vue.component('task-status', {
 		  if (this.index < 3)
     		app.tasks[this.index].complete = true;
 		  else
-			app.tasks[this.index].completedFail = true;
+			app.tasks[this.index].completedfail = true;
       }
     }
   }
@@ -71,10 +71,10 @@ app = new Vue({
 	el: '#task-list',
 	data: {
 	    tasks: [
-	      { id: 1, name: 'Data Uploading', complete: false, completedFail: false },
-	      { id: 2, name: 'Data Preprocessing', complete: false, completedFail: false },
-	      { id: 3, name: 'Model Creating', complete: false, completedFail: false },
-	      { id: 4, name: 'Model Deploying', complete: false, completedFail: false }
+	      { id: 1, name: 'Data Uploading', complete: false, completedfail: false },
+	      { id: 2, name: 'Data Preprocessing', complete: false, completedfail: false },
+	      { id: 3, name: 'Model Creating', complete: false, completedfail: false },
+	      { id: 4, name: 'Model Deploying', complete: false, completedfail: false }
 	    ]
   }
 })
