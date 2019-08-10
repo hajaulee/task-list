@@ -50,7 +50,9 @@ Vue.component('task-status', {
     complete: function (newStatus, oldSatus) {
 		this.on_completed()
     },
-	completedfail: this.on_completed
+	completedfail: function (newStatus, oldSatus) {
+		this.on_completed()
+    }
   },
   methods:{
 	on_completed: function(){
