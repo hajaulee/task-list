@@ -45,9 +45,7 @@ Vue.component('task-status', {
       	setTimeout(function () {
 	        this.success = true;
 	    }, 1000);
-	    setTimeout(function () {
-      		this.next_task();
-	    }, 3000);
+	    setTimeout(this.next_task, 3000);
     }
   },
   methods:{
