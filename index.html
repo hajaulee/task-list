@@ -42,12 +42,11 @@ Vue.component('task-status', {
 </div>`,
   watch: {
     complete: function (newStatus, oldSatus) {
-      	self = this;
       	setTimeout(function () {
-	        self.success = true;
+	        this.success = true;
 	    }, 1000);
 	    setTimeout(function () {
-      		self.next_task();
+      		this.next_task();
 	    }, 3000);
     }
   },
