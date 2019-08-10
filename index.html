@@ -48,20 +48,26 @@ Vue.component('task-status', {
 </div>`,
   watch: {
     complete: function (newStatus, oldSatus) {
-      	setTimeout(function () {
+		this.on_completed()
+    },
+	complatedfail: this.on_completed
+  },
+  methods:{
+	on_completed: function(){
+		setTimeout(function () {
 	      this.success = this.complete;
 	      this.fail = this.completedfail;
 	    }.bind(this), 1000);
 	    setTimeout(this.next_task, 3000);
-    }
-  },
-  methods:{
+	}
     next_task: function(){
       if(app.tasks.length > this.index){
-		  if (this.index < 2)
+		  if (this.index < 2){
     		app.tasks[this.index].complete = true;
-		  else
+		  }
+		  else{
 			app.tasks[this.index].completedfail = true;
+		  }
       }
     }
   }
