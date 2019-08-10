@@ -58,7 +58,7 @@ Vue.component('task-status', {
   methods:{
     next_task: function(){
       if(app.tasks.length > this.index){
-		  if (this.index < 3)
+		  if (this.index < 2)
     		app.tasks[this.index].complete = true;
 		  else
 			app.tasks[this.index].completedfail = true;
