@@ -15,7 +15,8 @@
   			:index="task.id"
   			:id="'task-'+task.id"
   			:name="task.name"
-  			:complete="task.complete">
+  			:complete="task.complete"
+			:completedFail="task.completedFail">
   		</task-status>
 	</div>
 <script type="text/javascript">
@@ -60,7 +61,7 @@ Vue.component('task-status', {
 		  if (this.index < 3)
     		app.tasks[this.index].complete = true;
 		  else
-			  app.tasks[this.index].completedFail = true;
+			app.tasks[this.index].completedFail = true;
       }
     }
   }
@@ -70,10 +71,10 @@ app = new Vue({
 	el: '#task-list',
 	data: {
 	    tasks: [
-	      { id: 1, name: 'Data Uploading', complete: false },
-	      { id: 2, name: 'Data Preprocessing', complete: false },
-	      { id: 3, name: 'Model Creating', complete: false },
-	      { id: 4, name: 'Model Deploying', complete: false }
+	      { id: 1, name: 'Data Uploading', complete: false, completedFail: false },
+	      { id: 2, name: 'Data Preprocessing', complete: false, completedFail: false },
+	      { id: 3, name: 'Model Creating', complete: false, completedFail: false },
+	      { id: 4, name: 'Model Deploying', complete: false, completedFail: false }
 	    ]
   }
 })
