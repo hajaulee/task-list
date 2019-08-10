@@ -44,13 +44,15 @@ Vue.component('task-status', {
     complete: function (newStatus, oldSatus) {
       	setTimeout(function () {
 	        this.success = true;
-	    }, 1000);
+	    }.bind(this), 1000);
 	    setTimeout(this.next_task, 3000);
     }
   },
   methods:{
     next_task: function(){
+      if(app.tasks.length > this.index){
     	app.tasks[this.index].complete = true;
+      }
     }
   }
 });
